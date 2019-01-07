@@ -403,6 +403,7 @@ router.post('/updatechild',(req,res)=>{
                                     'childs.$.schoolcity':req.body.schoolcity,
                                     'childs.$.schoolname':req.body.schoolname,
                                     'childs.$.grade':req.body.grade,
+                                    'childs.$.rollnumber':req.body.rollnumber,
                                     'childs.$.section':req.body.section
                                 },
                                 (err,resp)=>{
