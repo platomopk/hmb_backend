@@ -12,6 +12,7 @@
     "base64-img": "^1.0.4",
     "bcryptjs": "*",
     "body-parser": "*",
+    "cloudinary": "^1.13.2",
     "cors": "*",
     "express": "*",
     "file-saver": "1.3.3",
