@@ -6,10 +6,16 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 var base64Img = require('base64-img');
 const fs = require('fs');
+var cloudinary = require('cloudinary');
 
 //registerparent
 router.post('/registerparent', (req, res)=>{
     var dir = "./uploads/";
+    cloudinary.config({ 
+        cloud_name: 'devlabs-pakistan', 
+        api_key: '313335615588774', 
+        api_secret: 'cqU-1QHEw8JyrfRiyuEDG0F7u48' 
+      });
 
     //res.send("Register");
     let newUser = new User({
@@ -26,7 +32,6 @@ router.post('/registerparent', (req, res)=>{
         email: req.body.email,
         password: req.body.password,
         account:"parent",
-        childs:[],
         picture: req.body.picture,
     });
 
@@ -41,19 +46,42 @@ router.post('/registerparent', (req, res)=>{
         }else{
             const imagepath = newUser.picturename;
             newUser.picture = imagepath;
-            User.addUser(newUser, (err,user)=>{
-                if(err){
-                    res.json({success:false,error:"Failed to register parent user."+ err})
-                }else{
-                    res.json({success:true, data:"Parent registered"})
+
+            cloudinary.v2.uploader.upload(
+                dir+newUser.picturename
+                ,
+                {
+                    overwrite:true,
+                    invalidate:true,
+                    crop:"fill"
+                },
+                function(err,result){
+                    if(err){
+                        res.json({success:false,error:"Failed to register parent user."+ err})
+                    }else{
+                        newUser.picture = result.secure_url;
+                        User.addUser(newUser, (err,user)=>{
+                            if(err){
+                                res.json({success:false,error:"Failed to register parent user."+ err})
+                            }else{
+                                res.json({success:true, data:"Parent registered"})
+                            }
+                        });
+                    }
                 }
-            });
+            )
+           
         }
     });
 });
 
 router.post('/registerchild', (req, res)=>{
     var dir = "./uploads/";
+    cloudinary.config({ 
+        cloud_name: 'devlabs-pakistan', 
+        api_key: '313335615588774', 
+        api_secret: 'cqU-1QHEw8JyrfRiyuEDG0F7u48' 
+      });
 
     let child = {
         fullname:req.body.fullname,
@@ -82,34 +110,53 @@ router.post('/registerchild', (req, res)=>{
             const imagepath = req.body.picturename;
             child.picture = imagepath;
 
-            User.findOneAndUpdate(
+            cloudinary.v2.uploader.upload(
+                dir+req.body.picturename
+                ,
                 {
-                    email:child.createdby,
-                    'childs.cnic':{
-                        $ne:child.cnic
-                    }
+                    overwrite:true,
+                    invalidate:true,
+                    crop:"fill"
                 },
-                {
-                    $push:{
-                        childs:child
-                    }
-                },
-                {
-                    new:true
-                },
-                (err,doc)=>{
+                function(err,result){
                     if(err){
                         res.json({success:false,error:"Failed to register parent user."+ err})
                     }else{
-                        if(doc == null){
-                            res.json({success:false, error:"Child already present with the same cnic."})
-                        }else{
-                            res.json({success:true, data:doc})
-                        }
-                        
+                        child.picture = result.secure_url;
+
+                        User.findOneAndUpdate(
+                            {
+                                email:child.createdby,
+                                'childs.cnic':{
+                                    $ne:child.cnic
+                                }
+                            },
+                            {
+                                $push:{
+                                    childs:child
+                                }
+                            },
+                            {
+                                new:true
+                            },
+                            (err,doc)=>{
+                                if(err){
+                                    res.json({success:false,error:"Failed to register parent user."+ err})
+                                }else{
+                                    if(doc == null){
+                                        res.json({success:false, error:"Child already present with the same cnic."})
+                                    }else{
+                                        res.json({success:true, data:doc})
+                                    }
+                                    
+                                }
+                            }
+                        )
                     }
                 }
             )
+
+
         }
     });
 });
@@ -198,6 +245,11 @@ router.post('/child/delete',(req,res)=>{
 router.post('/updateparent',(req,res)=>{
     var dir = "./uploads/";
     let newUser;
+    cloudinary.config({ 
+        cloud_name: 'devlabs-pakistan', 
+        api_key: '313335615588774', 
+        api_secret: 'cqU-1QHEw8JyrfRiyuEDG0F7u48' 
+      });
     
     if(req.body.edited == "yes"){
         //res.send("Register");
@@ -226,23 +278,45 @@ router.post('/updateparent',(req,res)=>{
             }else{
                 const imagepath = newUser.picturename;
                 newUser.picture = imagepath;
-                User.updateOne({_id:newUser.id},{
-                    picture:newUser.picture,
-                    picturename:newUser.picture,
-                    fullname:newUser.fullname,
-                    gender:newUser.gender,
-                    cnic:newUser.cnic,
-                    phone:newUser.phone,
-                    landline:newUser.landline,
-                    address:newUser.address,
-                    city:newUser.city
-                },(err,resp)=>{
-                    if(err){
-                        res.json({success:false,error:"Failed to update parent user."+ err})
-                    }else{
-                        res.json({success:true, data:"Parent updated",fullname:newUser.fullname,picture:newUser.picture})
+
+                cloudinary.v2.uploader.upload(
+                    dir+newUser.picturename
+                    ,
+                    {
+                        overwrite:true,
+                        invalidate:true,
+                        crop:"fill"
+                    },
+                    function(err,result){
+                        if(err){
+                            res.json({success:false,error:"Failed to update parent user."+ err})
+                        }else{
+                            newUser.picture = result.secure_url;
+
+                            User.updateOne({_id:newUser.id},{
+                                picture:newUser.picture,
+                                picturename:newUser.picture,
+                                fullname:newUser.fullname,
+                                gender:newUser.gender,
+                                cnic:newUser.cnic,
+                                phone:newUser.phone,
+                                landline:newUser.landline,
+                                address:newUser.address,
+                                city:newUser.city
+                            },(err,resp)=>{
+                                if(err){
+                                    res.json({success:false,error:"Failed to update parent user."+ err})
+                                }else{
+                                    res.json({success:true, data:"Parent updated",fullname:newUser.fullname,picture:newUser.picture})
+                                }
+                            });
+                        }
                     }
-                });
+                )
+
+
+
+                
             }
         });
     }else{
@@ -282,6 +356,11 @@ router.post('/updateparent',(req,res)=>{
 router.post('/updatechild',(req,res)=>{
     var dir = "./uploads/";
     let newUser;
+    cloudinary.config({ 
+        cloud_name: 'devlabs-pakistan', 
+        api_key: '313335615588774', 
+        api_secret: 'cqU-1QHEw8JyrfRiyuEDG0F7u48' 
+      });
     
     if(req.body.edited == "yes"){
 
@@ -297,29 +376,49 @@ router.post('/updatechild',(req,res)=>{
                 const imagepath = req.body.picturename;
                 req.body.picture = imagepath;
 
-                User.updateOne(
+                cloudinary.v2.uploader.upload(
+                    dir+req.body.picturename
+                    ,
                     {
-                        email:req.body.createdby,
-                        'childs._id':req.body.id
+                        overwrite:true,
+                        invalidate:true,
+                        crop:"fill"
                     },
-                    {
-                        'childs.$.picture':req.body.picture,
-                        'childs.$.fullname':req.body.fullname,
-                        'childs.$.gender':req.body.gender,
-                        'childs.$.cnic':req.body.cnic,
-                        'childs.$.schoolcity':req.body.schoolcity,
-                        'childs.$.schoolname':req.body.schoolname,
-                        'childs.$.grade':req.body.grade,
-                        'childs.$.section':req.body.section
-                    },
-                    (err,resp)=>{
+                    function(err,result){
                         if(err){
-                            console.log(err);
-                            res.json({success:false,error:"Failed to update child ."+ err})
+                            res.json({success:false,error:"Failed to update parent user."+ err})
                         }else{
-                            res.json({success:true, data:"Parent updated"})
+                            req.body.picture = result.secure_url;
+
+                            User.updateOne(
+                                {
+                                    email:req.body.createdby,
+                                    'childs._id':req.body.id
+                                },
+                                {
+                                    'childs.$.picture':req.body.picture,
+                                    'childs.$.fullname':req.body.fullname,
+                                    'childs.$.gender':req.body.gender,
+                                    'childs.$.cnic':req.body.cnic,
+                                    'childs.$.schoolcity':req.body.schoolcity,
+                                    'childs.$.schoolname':req.body.schoolname,
+                                    'childs.$.grade':req.body.grade,
+                                    'childs.$.section':req.body.section
+                                },
+                                (err,resp)=>{
+                                    if(err){
+                                        console.log(err);
+                                        res.json({success:false,error:"Failed to update child ."+ err})
+                                    }else{
+                                        res.json({success:true, data:"Parent updated"})
+                                    }
+                            });
+                            
                         }
-                });
+                    }
+                )
+
+                
             }
         });
     }else{
