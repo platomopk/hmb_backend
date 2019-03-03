@@ -741,19 +741,17 @@ router.post('/parentnotification',(req,res)=>{
                                 content:content
                             });
                             notification.save(function(error){
-                                if (error) {
-                                    // throw error;
-                                    console.log(error);
-                                    // res.json({
-                                    //     success: false,
-                                    //     error: error
-                                    // });
-                                }else{
+                                if(error){
                                     res.json({
-                                        success: true,
-                                        data: doc
-                                    });
+                                        success:false,
+                                        error:error
+                                    })
+                                    return;
                                 }
+                                res.json({
+                                    success:true,
+                                    data:doc
+                                })
                             });
                         } else {
                             res.json({
