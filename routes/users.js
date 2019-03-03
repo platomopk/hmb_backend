@@ -739,11 +739,11 @@ router.post('/parentnotification',(req,res)=>{
                             userid:userid,
                             content:content
                         });
-                        notification.save(function(err){
-                            if (err) {
+                        notification.save(function(error){
+                            if (error) {
                                 res.json({
                                     success: false,
-                                    error: err
+                                    error: error
                                 })
                             }else{
                                 res.json({
