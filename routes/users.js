@@ -779,6 +779,84 @@ router.post('/parentnotification',(req,res)=>{
     )
 });
 
+router.post('/parentnotificationnearby',(req,res)=>{
+    // var userid = req.body._id;
+    // var drivername = req.body.drivername;
+    // var content = req.body.content;
+
+    // console.log(userid,drivername,content)
+
+    User.findOne(
+        {
+            _id:req.body._id
+        },
+        (err,doc)=>{
+            if(err){
+                console.log(err);
+                return res.json({
+                    success: false,
+                    error: err
+                });
+            }
+            if(doc!=null){
+                console.log(doc);
+                var message = {
+                    to: doc.usertoken,
+    
+                    data: {  //you can send only notification or only data(or include both)
+                        title: 'HMB - Notification',
+                        content: req.body.content
+                    }
+                };
+    
+                fcm.send(message, function (err, response) {
+                    if (err) {
+                        console.log(err);
+                        return res.json({
+                            success: false,
+                            error: err
+                        });
+                    } else {
+                        if (response) {
+                            console.log(response);
+
+    
+                            let notification = new Notification({
+                                userid:req.body._id,
+                                content:req.body.content
+                            });
+                            notification.save(function(error){
+                                if(error){
+                                    console.log(error)
+                                    return res.json({
+                                        success:false,
+                                        error:error
+                                    });
+                                }
+                                return res.json({
+                                    success:true,
+                                    data:doc
+                                });
+                            });
+                        } else {
+                            return res.json({
+                                success: false,
+                                error: "Not found."
+                            });
+                        }
+                    }
+                });
+            }else{
+                return res.json({
+                    success: false,
+                    error: "Not found."
+                });
+            }
+
+        }
+    )
+});
+
 router.post('/drivermarkpresent',(req,res)=>{
     var childid = req.body.childid;
     var driverid = req.body.driverid;
