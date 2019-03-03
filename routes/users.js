@@ -745,11 +745,12 @@ router.post('/parentnotification',(req,res)=>{
                                     success: false,
                                     error: err
                                 })
+                            }else{
+                                res.json({
+                                    success: true,
+                                    data: doc
+                                })
                             }
-                            res.json({
-                                success: true,
-                                data: doc
-                            })
                         });
                     } else {
                         res.json({
