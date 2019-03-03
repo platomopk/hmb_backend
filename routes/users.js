@@ -708,15 +708,14 @@ router.post('/parentnotification',(req,res)=>{
 
     User.findOne(
         {
-            _id:userid
+            _id:req.body._id
         },
         (err,doc)=>{
             if(err){
-                res.json({
+                return res.json({
                     success: false,
                     error: err
                 });
-                return false;
             }
             if(doc!=null){
                 var message = {
@@ -724,52 +723,48 @@ router.post('/parentnotification',(req,res)=>{
     
                     data: {  //you can send only notification or only data(or include both)
                         title: 'HMB - Notification',
-                        content: content
+                        content: req.body.content
                     }
                 };
     
                 fcm.send(message, function (err, response) {
                     if (err) {
-                        res.json({
+                        return res.json({
                             success: false,
                             error: err
                         });
-                        return false;
                     } else {
                         if (response) {
     
                             let notification = new Notification({
-                                userid:userid,
-                                content:content
+                                userid:req.body.userid,
+                                content:req.body.content
                             });
                             notification.save(function(error){
                                 if(error){
-                                    res.json({
+                                    return res.json({
                                         success:false,
                                         error:error
-                                    })
-                                    return false;
+                                    });
                                 }
-                                res.json({
+                                return res.json({
                                     success:true,
                                     data:doc
-                                })
+                                });
                             });
                         } else {
-                            res.json({
+                            return res.json({
                                 success: false,
                                 error: "Not found."
                             });
-                            return false;
                         }
                     }
                 });
             }else{
-                res.json({
+                return res.json({
                     success: false,
                     error: "Not found."
                 });
-                return false;
             }
 
         }
