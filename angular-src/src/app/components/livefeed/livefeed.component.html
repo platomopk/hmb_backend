@@ -1,0 +1,40 @@
+<app-topbar></app-topbar>
+<app-navbar></app-navbar>
+<br>
+<section id="messagingsection">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="menuitemscontainer">
+
+        <label for="">Track</label>
+        <select [(ngModel)]="driverid" class="form-control">
+          <option value="" disabled selected>Select driver</option>
+          <option *ngFor="let item of driversarr" [value]="item._id">{{item.fullname}}</option>
+        </select>
+        <button (click)="trackdriver()" class="btn btn-primary btn-sm btn-block" style="margin-top:5px;">Track driver</button>
+
+         
+      </div>
+    </div>
+    <div class="col-md-10" style="border-left:1px solid rgba(0,0,0,.1)">
+      <sebm-google-map style="height:80vh !important;" [latitude]="lat" [longitude]="lng" [zoom]="18" [disableDefaultUI]=false>
+        
+
+        <sebm-google-map-marker *ngIf="lat!=0" [iconUrl]="url" [latitude]="lat" [longitude]="lng">
+          <sebm-google-map-info-window>
+              <div [innerHTML]="snippet"></div>
+          </sebm-google-map-info-window>
+        </sebm-google-map-marker>
+<!-- 
+        <sebm-google-map-marker [iconUrl]="m.icon" *ngFor="let m of othermarkers" [latitude]="m.lat" [longitude]="m.lng">
+          <sebm-google-map-info-window>
+            <strong>{{m.name}}</strong>
+          </sebm-google-map-info-window>
+        </sebm-google-map-marker> -->
+
+
+      </sebm-google-map>
+    </div>
+
+  </div>
+</section>

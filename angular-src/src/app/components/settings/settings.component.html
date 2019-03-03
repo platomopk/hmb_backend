@@ -1,0 +1,42 @@
+<app-topbar></app-topbar>
+<app-navbar></app-navbar>
+<br>
+<section id="settingssection">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="menuitemscontainer">
+          <!-- compose -->
+          <div class="menuitemwrapper" [routerLink]="['./uac']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-lock"></i></span>
+                </div>
+                <div>
+                  User Access
+                </div>
+            </div>
+          </div>
+
+          <!-- inbox -->
+          <div class="menuitemwrapper" [routerLink]="['./masks']" routerLinkActive="hoverselected">
+            <div class="menuitem">
+                <div>
+                  <span><i class="fas fa-arrow-right"></i></span>
+                </div>
+                <div>
+                  Masks
+                </div>
+            </div>
+          </div>
+   
+          
+      </div>
+    </div>
+    <div class="col-md-10" style="border-left:1px solid rgba(0,0,0,.1)">
+      <div class="menuitemsviewscontainer">
+          <router-outlet></router-outlet>
+      </div>
+      
+    </div>
+  </div>
+</section>

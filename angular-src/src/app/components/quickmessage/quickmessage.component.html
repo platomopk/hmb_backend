@@ -1,0 +1,66 @@
+<br>
+<section id="quickSection">
+  <form (submit)="registerquick()">
+  <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" [(ngModel)]="name" name="name" id="name" class="form-control" placeholder="Enter name for this operation .." required>
+          </div>
+          <div class="form-group">
+              <label for="language">Select Language</label>
+              <select (change)="languagechange($event)" [(ngModel)]="language" name="language" id="language" class="form-control" required>
+                <option value="" disabled selected>Select Language</option>
+                <option value="english">English</option>
+                <option value="urdu">Urdu</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="masking">Select Masking</label>
+              <select (change)="maskingchange($event)" [(ngModel)]="masking" name="masking" id="masking" class="form-control" required>
+                <option value="" disabled selected>Select Masking</option>
+                <option *ngFor="let item of masksarr" [value]="item.mask">{{item.mask}} ({{item.type}})</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="mobilenos">Mobile Numbers</label>
+              <input type="text" [(ngModel)]="mobilenos" name="mobilenos" id="mobilenos" class="form-control" placeholder="Enter mobile numbers with commas" required>
+          </div>
+          <div class="form-group">
+              <label for="msg">Message / SMS</label>
+              <textarea (change)="messagechange($event)" (input)="messagechange($event)"  [(ngModel)]="msg" name="msg" id="" cols="30" rows="8" class="form-control" required></textarea>
+              <small class="text-muted">Characters Remaining: <span class="msghelper">{{msgchars}}</span> &nbsp;&nbsp;|&nbsp;&nbsp; No. if Messages:  <span class="msghelper">{{noofmsgs}}</span></small>
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <div class="form-group">
+              <label for="template">Select Template</label>
+              <select (change)="templatechange($event)" id="template" class="form-control">
+                <option value="" disabled selected>Select Template</option>
+                <option *ngFor="let item of templateArr" [value]="item.description">{{item.name}}</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label>Message Preference</label>
+              <br>
+              <label class="radio-inline">
+                <input type="radio" [(ngModel)]="preference" name="preference" value="withmask" required> With Mask
+              </label>&nbsp;&nbsp;&nbsp;
+              <label class="radio-inline">
+                <input type="radio" [(ngModel)]="preference" name="preference" value="withoutmask" required> Without Mask
+              </label>
+          </div>
+          <div class="form-group text-center">
+            <br><br>
+            <hr>
+              <input type="submit" value="Send SMS" class="btn btn-primary">
+            <hr>
+          </div>
+        </div>            
+
+  </div>
+
+</form>
+</section>
+
+

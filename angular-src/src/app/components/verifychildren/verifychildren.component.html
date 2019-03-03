@@ -1,0 +1,38 @@
+<section>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="lead"><u>Verify Children</u></p>
+        <div>
+            <table class="table table-sm table-hovered table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>B-Form #</th>
+                    <th>Grade</th>
+                    <th>Section</th>
+                    <th>Roll #</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of childsarr">
+                    <td>
+                      <img style="width:128px;height:128px;" src={{item.picture}} alt="Picture of the child.">  
+                    </td>
+                    <td>{{item.fullname}}</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.cnic}}</td>
+                    <td>{{item.grade}}</td>
+                    <td>{{item.section}}</td>
+                    <td>{{item.rollnumber}}</td>
+                    <td><input type="button" class="btn btn-xs btn-success " value="Verify" (click)="verify(item._id)"></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  

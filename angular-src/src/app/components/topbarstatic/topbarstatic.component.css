@@ -1,0 +1,33 @@
+
+#topbarsection{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:#1565C0;
+}
+
+#tpcontainerwrapper{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#logotext{
+    padding:0px;
+    margin:0px;
+    color:white;
+    font-size: large;
+    font-weight:bold;
+}
+
+#tpdockright{
+    float:right;
+}
+
+.dockitems{
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size:small;
+    padding:10px;
+    /* border:1px solid white; */
+    color:white;
+    margin-left:15px;
+}

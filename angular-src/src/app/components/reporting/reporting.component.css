@@ -1,0 +1,20 @@
+#reportingSection{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: small;
+
+}
+
+.form-control{
+    font-size: small;
+    border-radius: 0px;
+}
+
+.btn{
+    font-size: small;
+    width:100%;
+}
+
+.clearfix{
+    height: 10px;
+}

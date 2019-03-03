@@ -1,3 +1,53 @@
-<p>
-  register works!
-</p>
+<section id="registerSection">
+    <div>
+        <form (submit)="onRegister()">
+          <div class="form-group">
+            <label for="fullname">City</label>
+            <select name="city" [(ngModel)]="city" class="form-control" required>
+              <option value="" selected disabled>Please select city</option>
+              <option value="islamabad">Islamabad</option>
+              <option value="rawalpindi">Rawalpindi</option>
+              <option value="lahore">Lahore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fullname">School Name</label>
+            <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" aria-describedby="fullnameHelp" placeholder="Enter school name" required>
+            <small id="fullnamhelp" class="form-text text-muted">This name will be used to address you in emails.</small>
+          </div>
+          <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="number" [(ngModel)]="phone" name="phone" class="form-control" id="phone" aria-describedby="phoneHelp" placeholder="Enter Phone #" required>
+              <small id="phonehelp" class="form-text text-muted">This information is publicly accessible.</small>
+            </div>
+            <div class="form-group">
+              <label for="phone">Address</label>
+              <input type="text" [(ngModel)]="address" name="address" class="form-control" id="address" aria-describedby="addresshelp" placeholder="Enter Address" required>
+              <small id="addresshelp" class="form-text text-muted">This information is publicly accessible.</small>
+            </div>
+            <div class="form-group">
+              <label for="phone">Location</label>
+              <input type="text" [(ngModel)]="location" name="location" class="form-control" id="location" aria-describedby="locationhelp" placeholder="Enter Location (lat,lng)" required>
+              <a class="text-primary" id="getloc" (click)="getlocation()">Get Current Location</a>
+              <small id="locationhelp" class="form-text text-muted">This information is required to locate your school</small>
+            </div>
+          <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" [(ngModel)]="email" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password" placeholder="Password" required>
+              <small id="passwordhelp" class="form-text text-muted">By signing in, you declare to abide by the terms and conditions of this platform.</small>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <div class="clearfix"></div>
+                <button class="btn btn-default" [routerLink]="['../login']">Already a Member? Log In</button>
+            </div>
+            
+          </form>
+    </div>
+  </section>
+  

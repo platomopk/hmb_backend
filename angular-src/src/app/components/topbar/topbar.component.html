@@ -1,0 +1,56 @@
+<section id="topbarsection">
+  <div class="" id="tpcontainerwrapper">
+    <div >
+      <div id="container">
+        <span [routerLink]="['/default']" ><label id="logotext">HMB</label>&nbsp;&nbsp;</span>
+        <!-- <label id="api">(Instance ID: {{instanceid}})</label> -->
+        <span id="tpdockright" *ngIf="loggedIn">
+
+
+          <!-- new messages -->
+          <!-- <span class="dockitems">
+              <span (click)="onNewMessage()" ><i class="fa fa-retweet"></i>&nbsp;<span>Inbox</span></span>
+          </span> -->
+
+          <!-- name -->
+          <span class="dockitems">
+              <span (click)="onProfile()" ><i class="fas fa-user-circle"></i>&nbsp;<span>Profile</span></span>
+          </span>
+
+          <!-- logout -->
+          <span class="dockitems">
+              <span (click)="onLogout()" ><i class="fa fa-arrow-right"></i>&nbsp;<span>Logout</span></span>
+          </span>
+          
+        </span>
+        
+      </div>
+    </div>
+  </div>
+
+  <div id="sidebar" *ngIf="sidebarShow">
+    <div class="header text-center">
+      <span><i class="fa fa-caret-down"></i></span>
+    </div>
+
+    <!-- messages -->
+    <div class="cardcontainer">
+      <label >+92123456</label>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Ipsa ...</p>
+      <small>9:30 pm</small>
+    </div>
+
+    <div class="cardcontainer">
+      <label >+92123456</label>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Ipsa ...</p>
+      <small>9:30 pm</small>
+    </div>
+
+    <div class="cardcontainer">
+        <label >+92123456</label>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Ipsa ...</p>
+        <small>9:30 pm</small>
+      </div>
+
+  </div>
+</section>

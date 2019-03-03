@@ -1,0 +1,78 @@
+<br>
+<section id="quickSection">
+  <form (submit)="registerbulk()">
+  <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="name" name="name" required id="name" class="form-control" placeholder="Enter name for this operation ..">
+            </div>
+            <div class="form-group">
+                <label for="language">Select Language</label>
+                <select [(ngModel)]="language" name="language" id="language" (change)="languagechange($event)" class="form-control">
+                  <option value="" disabled selected>Select Language</option>
+                  <option value="english">English</option>
+                  <option value="urdu">Urdu</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Operation Type</label>
+                <br>
+                <label class="radio-inline">
+                  <input type="radio" (change)="opchange($event)" name="optype" value=""> No Template
+                </label>&nbsp;&nbsp;&nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="optype" (change)="opchange($event)" value="static"> Static Template
+                </label>&nbsp;&nbsp;&nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="optype" (change)="opchange($event)" value="dynamic"> Dynamic Template
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="template">Select Template</label>
+                <select (change)="templatechange($event)" name="template" id="template" class="form-control">
+                  <option value="" disabled selected>Select Template</option>
+                  <option *ngFor="let item of templatesArr" [value]="item.description">{{item.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="campaign">Campaign Name</label>
+                <select (change)="campaignchange($event)" name="campaign" id="campaign" class="form-control">
+                  <option value="" disabled selected>Select Campaign</option>
+                  <option *ngFor="let item of campaignsArr" [value]="item.path">{{item.name}}</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="col-md-6 form-group">
+            <div class="form-group">
+                <label for="masking">Select Masking</label>
+                <select [(ngModel)]="masking" (change)="maskingchange($event)" name="masking" id="masking" class="form-control" required>
+                  <option value="" disabled selected>Select Masking</option>
+                  <option *ngFor="let item of masksarr" [value]="item.mask">{{item.mask}} ({{item.type}})</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="msg">Message / SMS</label>
+                <textarea (change)="msgchange()" (input)="msgchange()" [(ngModel)]="msg" name="msg" id="" cols="30" rows="4" class="form-control" required></textarea>
+                <small class="text-muted">Characters Remaining: <span class="msghelper">{{msgchars}}</span> &nbsp;&nbsp;|&nbsp;&nbsp; No. if Messages:  <span class="msghelper">{{msgcount}}</span></small>
+            </div>
+            <!-- <div class="form-group">
+                <label for="cdate">Date (MM/dd/yyyy hh:mm:ss am/pm)</label>
+                <input type="text" [(ngModel)]="cdate" name="cdate" id="cdate" class="form-control" placeholder="Enter date here .." required>
+            </div> -->
+
+
+
+          <div class="form-group text-center">
+            <div class="clearfix"></div>
+            <hr>
+              <input type="submit" value="Send Bulk SMS" class="btn btn-primary">
+            <hr>
+          </div>
+        </div>            
+
+  </div>
+</form>
+</section>
+

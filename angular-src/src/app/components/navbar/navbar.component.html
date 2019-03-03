@@ -1,8 +1,143 @@
-<div class="container" style="background-color:#e6e6e6;">
-  <p>
-    <a [routerLinkActive]="['active']" [routerLink]="['/']">Home</a>&nbsp;
-    <a [routerLinkActive]="['active']" [routerLink]="['/profile']">Profile</a>&nbsp;
-    <a [routerLinkActive]="['active']" [routerLink]="['/dashboard']">Dashboard</a>&nbsp;
-    <a [routerLinkActive]="['active']" [routerLink]="['/login']">Login</a>&nbsp;
-    <a [routerLinkActive]="['active']" [routerLink]="['/register']">Register</a>&nbsp;</p>
-</div>
+<section id="navbarsection" *ngIf="loggedIn">
+  <div class="" id="nbwrapper">
+    <div id="nditemscontainer">
+      <div class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/default']">
+        <div class="nbitemsimg">
+          <span><i class="fa fa-snowflake-o"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Home
+        </div>
+      </div>
+      <div class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/children']">
+        <div class="nbitemsimg">
+          <span><i class="fas fa-child"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Children
+        </div>
+      </div>
+      <div class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/drivers']">
+        <div class="nbitemsimg">
+          <span><i class="fas fa-bus"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Drivers
+        </div>
+      </div>
+      <div class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/livefeed']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-map"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Livefeed
+        </div>
+      </div>
+      <!-- dashboard -->
+      <div *ngIf="dashboard" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/dashboard']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-clock"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Dashboard
+        </div>
+      </div>
+      <!-- messaging -->
+      <div *ngIf="messaging" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/messaging']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-envelope-open"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Messaging
+        </div>
+      </div>
+      <!-- notification -->
+      <div *ngIf="notification" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/notification']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-bell"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Notification
+        </div>
+      </div>
+      <!-- hybrid -->
+      <div *ngIf="hybrid" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/hybrid']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-paper-plane"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Hybrid
+        </div>
+      </div>
+      <!-- reporting -->
+      <div *ngIf="reporting" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/reporting']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-file"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Reporting
+        </div>
+      </div>
+      <div *ngIf="lea" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/leareporting']">
+        <div class="nbitemsimg">
+          <span><i class="fas fa-shield-alt"></i></span>
+        </div>
+        <div class="nbitemstext">
+          LEA Reporting
+        </div>
+      </div>
+      <!-- address -->
+      <div *ngIf="contacts" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/addressbook']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-address-card"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Contacts
+        </div>
+      </div>
+      <!-- Issue -->
+      <div *ngIf="tracker" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/issuestracker']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-hand-paper"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Tracker
+        </div>
+      </div>
+      <!-- prcing -->
+      <div *ngIf="pricing" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/pricing']">
+        <div class="nbitemsimg">
+          <span><i class="far fa-money-bill-alt"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Pricing
+        </div>
+      </div>
+      <!-- settings -->
+      <div *ngIf="settings" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/settings']">
+        <div class="nbitemsimg">
+          <span><i class="fa fa-cog"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Settings
+        </div>
+      </div>
+
+
+
+
+      <!-- master -->
+      <div *ngIf="master" class="nbitems text-center" routerLinkActive="hoverselected" [routerLink]="['/master']">
+        <div class="nbitemsimg">
+          <span><i class="fa fa-user-secret"></i></span>
+        </div>
+        <div class="nbitemstext">
+          Master
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>

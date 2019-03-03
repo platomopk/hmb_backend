@@ -1,0 +1,14 @@
+<section>
+  <div class="routerarea text-center">
+    <input type="button" value="Quick" [routerLink]="['./quick']"  routerLinkActive="hoverselected" class="btn btn-default btn-sm">
+    &nbsp;
+    <input type="button" value="Bulk" [routerLink]="['./bulk']"  routerLinkActive="hoverselected" class="btn btn-default btn-sm">
+    &nbsp;
+    <input type="button" value="Drip" [routerLink]="['./drip']"  routerLinkActive="hoverselected" class="btn btn-default btn-sm">
+    &nbsp;
+    <input *ngIf="digital" type="button" value="WhatsApp" [routerLink]="['./digital']"  routerLinkActive="hoverselected" class="btn btn-default btn-sm">
+  </div>
+  <div>
+    <router-outlet></router-outlet> 
+  </div>
+</section>

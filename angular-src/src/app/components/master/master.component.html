@@ -1,0 +1,117 @@
+<app-topbar></app-topbar>
+<app-navbar></app-navbar>
+<br>
+<section id="messagingsection">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="menuitemscontainer">
+          <!-- compose -->
+          <div class="menuitemwrapper" [routerLink]="['./newaccount']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  New Account
+                </div>
+            </div>
+          </div>
+
+          <div class="menuitemwrapper" [routerLink]="['./moderate']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Account Moderation
+                </div>
+            </div>
+          </div>
+
+          <div class="menuitemwrapper" [routerLink]="['./accounts']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Manage Account
+                </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="menuitemwrapper" [routerLink]="['./bundle']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Bundles 
+                </div>
+            </div>
+          </div>
+
+          <div class="menuitemwrapper" [routerLink]="['./credit']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Top-ups 
+                </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="menuitemwrapper" [routerLink]="['./masks']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Masks/Shortcodes 
+                </div>
+            </div>
+          </div>
+
+          <div class="menuitemwrapper" [routerLink]="['./issues']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Issues 
+                </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="menuitemwrapper" [routerLink]="['./reports']"  routerLinkActive="hoverselected" >
+            <div class="menuitem">
+                <div>
+                  <span><i class="fa fa-long-arrow-right"></i></span>
+                </div>
+                <div>
+                  Reports
+                </div>
+            </div>
+          </div>
+
+          <hr>
+
+          
+          
+          
+      </div>
+    </div>
+    <div class="col-md-10" style="border-left:1px solid rgba(0,0,0,.1)">
+      <div class="menuitemsviewscontainer">
+          <router-outlet></router-outlet>
+      </div>
+      
+    </div>
+  </div>
+</section>

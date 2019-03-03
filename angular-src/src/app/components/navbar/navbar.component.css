@@ -1,0 +1,38 @@
+#navbarsection{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #f6f6f6;
+}
+
+#nbitemscontainer{
+    display: inline-block;
+}
+.nbitems{
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px;
+    color:#333;
+}
+
+#nbwrapper{
+}
+
+.nbitemsimg{
+
+}
+
+.nbitemstext{
+    font-size: small;
+}
+
+.hoverselected{
+    color:black;
+    box-sizing: border-box;
+    /* color: #1565C0; */
+    /* border-left: 2px solid #1565C0; */
+    /* padding-left: 8px; */
+    background: #1565c008;
+    /* color: #1565C0; */
+    border-bottom: 2px solid #1565C0;
+}

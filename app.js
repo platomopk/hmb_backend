@@ -29,10 +29,11 @@ mongoose.connection.on('error',(err)=>{
 const app = express();
 
 //the router file for users
-const users = require('./routes/users')
+const users = require('./routes/users');
+const schools = require('./routes/schools');
 
 //port
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 //middlewares
 //any domain can access our server 
@@ -57,11 +58,32 @@ require('./config/passport')(passport);
 
 //user routes file
 app.use('/users', users); 
+app.use('/schools', schools); 
 
 //index route
 app.get('/',(req,res) => {
  res.send("Haye Mere Bachay.");
 });
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '/public', 'index.html'));
+    // res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
+app.get('/test/:id',(req,res)=>{
+    var id = req.params.id;
+    var rand = Math.random();
+
+    setTimeout(function() {
+        res.json({
+            success:true,
+            id:id,
+            got:"got id : " + id,
+            sleptfor:rand
+        })    
+    }, rand);
+    
+})
 
 
 //create server

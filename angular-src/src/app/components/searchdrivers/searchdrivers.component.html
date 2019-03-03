@@ -1,0 +1,68 @@
+<section>
+    <p class="lead"><u>Search Drivers</u></p>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Search (via CNIC)</label>
+          <input type="text" [(ngModel)]="cnic" class="form-control" placeholder="Enter cnic ..">
+        </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+            <label>Search (via regid)</label>
+            <input type="text" [(ngModel)]="regid" class="form-control" placeholder="Enter regid ..">
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <input [disabled]="searched == true" (click)="search()" type="button" value="Search" class="btn btn-sm btn-primary">
+        </div>
+        <div class="form-group">
+          <small *ngIf="searched == true"><span><i class="fa fa-spinner fa-spin"></i>&nbsp;Please wait ...</span></small>
+          <small *ngIf="1==2" >No Records Found.</small>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </section>
+  
+  <section>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead"><u>Details</u></p>
+          <div>
+              <table class="table table-sm table-hovered table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Picture</th>
+                      <th>Name</th>
+                      <th>Gender</th>
+                      <th>B-Form #</th>
+                      <th>Phone</th>
+                      <th>Address</th>
+                      <th>RegID</th>
+                      <th>Capacity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of childarr">
+                      <td>
+                        <img style="width:128px;height:128px;" src={{item.picture}} alt="Picture of the child.">  
+                      </td>
+                      <td>{{item.fullname}}</td>
+                      <td>{{item.gender}}</td>
+                      <td>{{item.cnic}}</td>
+                      <td>{{item.phone}}</td>
+                      <td>{{item.address}}</td>
+                      <td>{{item.carregistration}}</td>
+                      <td>{{item.seatingcapacity}}</td>
+                      <!-- <td><input type="button" class="btn btn-xs btn-success " value="Verify" (click)="verify(item._id)"></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+      </div>
+    </section>

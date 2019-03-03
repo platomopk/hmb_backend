@@ -43,12 +43,14 @@ const UserSchema = mongoose.Schema({
     homelocation:{
         type:String
     },
+    schools:[String],
+    allotedchildids:[String],
     childs:[
         {
             fullname:{
                 type:String
             },
-            cnic:{type:String,unique:true},
+            cnic:{type:String},
             gender:String,
             picture:String,
             schoolcity:String,
@@ -59,9 +61,28 @@ const UserSchema = mongoose.Schema({
             schoollocation:String,
             created:{
                 type:Date,
-                default:moment.utc().toDate()
+                default:moment.utc().add('5','hours').toDate()
             },
-            isverified:Boolean
+            isverified:Boolean,
+            athome:{
+                type:Boolean,
+                default:true
+            },
+            enroute:{
+                type:Boolean,
+                default:false
+            },
+            atschool:{
+                type:Boolean,
+                default:false
+            },
+            driveradded:{
+                type:Boolean,
+                default:false
+            },
+            driverid:{
+                type:String
+            }
         }
     ],
     email:{
@@ -71,9 +92,35 @@ const UserSchema = mongoose.Schema({
     password:{
         type:String
     },
+    carregistration:{
+        type:String
+    },
+    seatingcapacity:{
+        type:String
+    },
+    activatedchilds:[String],
+    seatingfilled:{
+        type:Number,
+        default:0
+    },
+    activated:{
+        type:Boolean,
+        default:false
+    },
+    suspended:{
+        type:Boolean,
+        default:false
+    },
     created:{
         type:Date,
-        default:moment.utc().toDate()
+        default:moment.utc().add('5','hours').toDate()
+    },
+    driverschoolname:{
+        type:String
+    },
+    lastknown:{
+        type:String,
+        default:'33.7182,73.0605'
     }
 });
 
@@ -105,7 +152,6 @@ module.exports.addUser = function(newUser, callback){
             
         });
     });
-    
 }
 
 module.exports.comparePassword = function(password,hash,callback){
