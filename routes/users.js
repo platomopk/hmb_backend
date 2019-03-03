@@ -741,22 +741,24 @@ router.post('/parentnotification',(req,res)=>{
                         });
                         notification.save(function(error){
                             if (error) {
-                                res.json({
-                                    success: false,
-                                    error: error
-                                })
+                                // throw error;
+                                console.log(error);
+                                // res.json({
+                                //     success: false,
+                                //     error: error
+                                // });
                             }else{
                                 res.json({
                                     success: true,
                                     data: doc
-                                })
+                                });
                             }
                         });
                     } else {
                         res.json({
                             success: false,
                             error: "Not found."
-                        })
+                        });
                     }
                 }
             });
