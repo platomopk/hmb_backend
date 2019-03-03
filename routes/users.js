@@ -706,18 +706,22 @@ router.post('/parentnotification',(req,res)=>{
     var drivername = req.body.drivername;
     var content = req.body.content;
 
+    console.log(userid,drivername,content);
+
     User.findOne(
         {
             _id:req.body._id
         },
         (err,doc)=>{
             if(err){
+                console.log(err);
                 return res.json({
                     success: false,
                     error: err
                 });
             }
             if(doc!=null){
+                console.log(doc);
                 var message = {
                     to: doc.usertoken,
     
@@ -729,12 +733,15 @@ router.post('/parentnotification',(req,res)=>{
     
                 fcm.send(message, function (err, response) {
                     if (err) {
+                        console.log(err);
                         return res.json({
                             success: false,
                             error: err
                         });
                     } else {
                         if (response) {
+                            console.log(response);
+
     
                             let notification = new Notification({
                                 userid:req.body.userid,
@@ -742,6 +749,7 @@ router.post('/parentnotification',(req,res)=>{
                             });
                             notification.save(function(error){
                                 if(error){
+                                    console.log(error)
                                     return res.json({
                                         success:false,
                                         error:error
