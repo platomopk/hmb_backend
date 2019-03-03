@@ -702,11 +702,11 @@ router.post('/profile',(req,res)=>{
 
 
 router.post('/parentnotification',(req,res)=>{
-    var userid = req.body._id;
-    var drivername = req.body.drivername;
-    var content = req.body.content;
+    // var userid = req.body._id;
+    // var drivername = req.body.drivername;
+    // var content = req.body.content;
 
-    console.log(userid,drivername,content);
+    // console.log(userid,drivername,content)
 
     User.findOne(
         {
@@ -744,7 +744,7 @@ router.post('/parentnotification',(req,res)=>{
 
     
                             let notification = new Notification({
-                                userid:req.body.userid,
+                                userid:req.body._id,
                                 content:req.body.content
                             });
                             notification.save(function(error){
