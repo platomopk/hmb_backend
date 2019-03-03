@@ -731,6 +731,8 @@ router.post('/parentnotification',(req,res)=>{
                     }
                 };
     
+                console.log(message);
+
                 fcm.send(message, function (err, response) {
                     if (err) {
                         console.log(err);
@@ -740,7 +742,7 @@ router.post('/parentnotification',(req,res)=>{
                         });
                     } else {
                         if (response) {
-                            console.log(response);
+                            console.log('response : ',response);
 
     
                             let notification = new Notification({
@@ -749,7 +751,7 @@ router.post('/parentnotification',(req,res)=>{
                             });
                             notification.save(function(error){
                                 if(error){
-                                    console.log(error)
+                                    console.log('error',error)
                                     return res.json({
                                         success:false,
                                         error:error
