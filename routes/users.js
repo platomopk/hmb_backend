@@ -715,7 +715,8 @@ router.post('/parentnotification',(req,res)=>{
                 res.json({
                     success: false,
                     error: err
-                })
+                });
+                return false;
             }
             if(doc!=null){
                 var message = {
@@ -732,7 +733,8 @@ router.post('/parentnotification',(req,res)=>{
                         res.json({
                             success: false,
                             error: err
-                        })
+                        });
+                        return false;
                     } else {
                         if (response) {
     
@@ -746,7 +748,7 @@ router.post('/parentnotification',(req,res)=>{
                                         success:false,
                                         error:error
                                     })
-                                    return;
+                                    return false;
                                 }
                                 res.json({
                                     success:true,
@@ -758,6 +760,7 @@ router.post('/parentnotification',(req,res)=>{
                                 success: false,
                                 error: "Not found."
                             });
+                            return false;
                         }
                     }
                 });
@@ -766,6 +769,7 @@ router.post('/parentnotification',(req,res)=>{
                     success: false,
                     error: "Not found."
                 });
+                return false;
             }
 
         }
