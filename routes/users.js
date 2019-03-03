@@ -717,51 +717,59 @@ router.post('/parentnotification',(req,res)=>{
                     error: err
                 })
             }
-            var message = {
-                to: doc.usertoken,
-
-                data: {  //you can send only notification or only data(or include both)
-                    title: 'HMB - Notification',
-                    content: content
-                }
-            };
-
-            fcm.send(message, function (err, response) {
-                if (err) {
-                    res.json({
-                        success: false,
-                        error: err
-                    })
-                } else {
-                    if (response) {
-
-                        let notification = new Notification({
-                            userid:userid,
-                            content:content
-                        });
-                        notification.save(function(error){
-                            if (error) {
-                                // throw error;
-                                console.log(error);
-                                // res.json({
-                                //     success: false,
-                                //     error: error
-                                // });
-                            }else{
-                                res.json({
-                                    success: true,
-                                    data: doc
-                                });
-                            }
-                        });
-                    } else {
+            if(doc!=null){
+                var message = {
+                    to: doc.usertoken,
+    
+                    data: {  //you can send only notification or only data(or include both)
+                        title: 'HMB - Notification',
+                        content: content
+                    }
+                };
+    
+                fcm.send(message, function (err, response) {
+                    if (err) {
                         res.json({
                             success: false,
-                            error: "Not found."
-                        });
+                            error: err
+                        })
+                    } else {
+                        if (response) {
+    
+                            let notification = new Notification({
+                                userid:userid,
+                                content:content
+                            });
+                            notification.save(function(error){
+                                if (error) {
+                                    // throw error;
+                                    console.log(error);
+                                    // res.json({
+                                    //     success: false,
+                                    //     error: error
+                                    // });
+                                }else{
+                                    res.json({
+                                        success: true,
+                                        data: doc
+                                    });
+                                }
+                            });
+                        } else {
+                            res.json({
+                                success: false,
+                                error: "Not found."
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }else{
+                res.json({
+                    success: false,
+                    error: "Not found."
+                });
+            }
+
         }
     )
 });
